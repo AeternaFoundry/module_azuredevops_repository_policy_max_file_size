@@ -1,0 +1,32 @@
+variable "repository_policy_max_file_sizes" {
+  description = <<EOT
+Map of repository_policy_max_file_sizes, attributes below
+Required:
+    - max_file_size
+    - project_id
+Optional:
+    - blocking
+    - enabled
+    - repository_ids
+    - timeouts (block):
+        - create (optional)
+        - delete (optional)
+        - read (optional)
+        - update (optional)
+EOT
+
+  type = map(object({
+    max_file_size  = number
+    project_id     = string
+    blocking       = optional(bool)
+    enabled        = optional(bool)
+    repository_ids = optional(list(string))
+    timeouts = optional(object({
+      create = optional(string)
+      delete = optional(string)
+      read   = optional(string)
+      update = optional(string)
+    }))
+  }))
+}
+
